@@ -1,0 +1,49 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Obstacles
+  m_EditorClassIdentifier: 
+  m_GroupName: Obstacles
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 84e107ae791adbf45be60ebb7697a0df
+  m_SerializeEntries:
+  - m_GUID: d651fd721ce90ae44a948cd60ad4c466
+    m_Address: Obctacle_FallenTreeRock
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 4653509391c037240b8fd1982df94e60
+    m_Address: Obstacle_CarTire
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: e0f11839e3b4d0d459e8ead6c5ca332b
+    m_Address: Obstacle_CarTireFallenTree
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: a9f3d27e8982ec94c82183021b313398
+    m_Address: Obstacle_FallenTree
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 9eb528348b6158a4888fa149bf71443f
+    m_Address: Obstacle_Rock
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 57f5dd8d82dd36b41b8cdf3c72d962d0
+    m_Address: Obstacle_RockWall
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 1c9074cfb20889b478dc0dca98a15b71, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: a5611cf833df5184286de745945a856f, type: 2}
+    - {fileID: 11400000, guid: bc5b7f09591bdec48b48cd7f22b45848, type: 2}
