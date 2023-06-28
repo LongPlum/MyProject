@@ -5,7 +5,6 @@ using UnityEngine;
 public class ScrollGround : MonoBehaviour
 {
     private float scrollSpeed = 10f;
-    private BoxCollider boxCollider;
     
     
 
@@ -13,7 +12,6 @@ public class ScrollGround : MonoBehaviour
 
     void Start()
     {
-        boxCollider = GetComponent<BoxCollider>();
     }
      
     void Update()

@@ -6,6 +6,7 @@ using UnityEngine;
 public class DespawnGround : MonoBehaviour
 {
     [SerializeField] private float spawnPointZ;
+    //public event Action SpawnGround;
 
     void Start()
     {
@@ -20,6 +21,7 @@ public class DespawnGround : MonoBehaviour
     {
         if (other.gameObject.CompareTag("DespawnTrigger"))
         {
+           // SpawnGround();
             transform.parent.localPosition = new Vector3(transform.parent.transform.position.x, transform.parent.transform.position.y, spawnPointZ);
         }
     }

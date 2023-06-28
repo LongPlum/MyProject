@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using DG.Tweening;
 
 public class PlayerMovement : MonoBehaviour
@@ -13,6 +14,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float rollDuration = 2f;
     [SerializeField] private Collider boundsCollider;
     [SerializeField] private SphereCollider playerCollider;
+    [SerializeField] private InputActionAsset keyboardInput;
 
 
 
@@ -22,10 +24,19 @@ public class PlayerMovement : MonoBehaviour
     //private float inertia;
     private Sequence slideTween;
     private bool isJump;
+    private InputAction moveHorizontal;
+    private InputAction moveVertical;
+
 
 
     private void Start()
     {
+        moveHorizontal = keyboardInput.FindActionMap("Keyboard").FindAction("MoveHorizontal");
+        moveVertical = keyboardInput.FindActionMap("Keyboard").FindAction("MoveVertical");
+        moveHorizontal.Enable();
+        moveVertical.Enable();
+
+
         Yoffset = playerCollider.radius;
         slideTween = DOTween.Sequence()
               .Append(transform.DOScaleY(transform.localScale.y / 2, HalfRollDuration))
@@ -40,14 +51,12 @@ public class PlayerMovement : MonoBehaviour
     private void Update()
     {
 
-        float moveHorizontal = Input.GetAxisRaw("Horizontal");
-        float moveVertical = Input.GetAxisRaw("Vertical");
         gravityAcc -= gravity * Time.deltaTime;
 
         //inertia += moveHorizontal * inertiaSpeed * Time.deltaTime;
         //inertia = Mathf.Clamp(inertia, -inertiaSpeed, inertiaSpeed);
 
-        var dir = new Vector3(moveHorizontal * moveSpeed * Time.deltaTime, gravityAcc * Time.deltaTime, 0);
+        var dir = new Vector3(moveHorizontal.ReadValue<float>() * moveSpeed * Time.deltaTime, gravityAcc * Time.deltaTime, 0);
         var pos = transform.position;
         var posNext = dir + pos;
         
@@ -91,9 +100,9 @@ public class PlayerMovement : MonoBehaviour
 
         if (isGrounded && !slideTween.IsPlaying())
         {
-            if (moveVertical < 0)
+            if (moveVertical.ReadValue<float>() < 0)
                 slideTween.Restart();
-            else if (moveVertical > 0 && !isJump)
+            else if (moveVertical.ReadValue<float>() > 0 && !isJump)
             {
                 gravityAcc = jumpForce;
                 isJump = true;

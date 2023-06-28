@@ -480,6 +480,37 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!1 &883156389
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 883156390}
+  m_Layer: 0
+  m_Name: ObstaclePull
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &883156390
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 883156389}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 8.467497, y: -8.006531, z: 81.54008}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -743,6 +774,7 @@ MonoBehaviour:
   rollDuration: 2
   boundsCollider: {fileID: 702414128}
   playerCollider: {fileID: 1117313227}
+  keyboardInput: {fileID: -944628639613478452, guid: 27f7aaf47606c4d4393dd0f28687fb4b, type: 3}
 --- !u!1 &1149258753
 GameObject:
   m_ObjectHideFlags: 0
@@ -787,13 +819,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9edb07ea118af7f42828d29abb781224, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ObstaclesArray:
-  - {fileID: 102982656859335998, guid: 57f5dd8d82dd36b41b8cdf3c72d962d0, type: 3}
-  - {fileID: 8436457102550550075, guid: 9eb528348b6158a4888fa149bf71443f, type: 3}
-  - {fileID: 144478489973793142, guid: a9f3d27e8982ec94c82183021b313398, type: 3}
-  - {fileID: 3344923027328917221, guid: e0f11839e3b4d0d459e8ead6c5ca332b, type: 3}
-  - {fileID: 7831538357907946690, guid: 4653509391c037240b8fd1982df94e60, type: 3}
+  obstacleAssets:
   - {fileID: 5787657093263859515, guid: d651fd721ce90ae44a948cd60ad4c466, type: 3}
+  - {fileID: 7831538357907946690, guid: 4653509391c037240b8fd1982df94e60, type: 3}
+  - {fileID: 3344923027328917221, guid: e0f11839e3b4d0d459e8ead6c5ca332b, type: 3}
+  - {fileID: 144478489973793142, guid: a9f3d27e8982ec94c82183021b313398, type: 3}
+  - {fileID: 8436457102550550075, guid: 9eb528348b6158a4888fa149bf71443f, type: 3}
+  - {fileID: 102982656859335998, guid: 57f5dd8d82dd36b41b8cdf3c72d962d0, type: 3}
 --- !u!1 &1419780151
 GameObject:
   m_ObjectHideFlags: 0
