@@ -8,35 +8,36 @@ using UnityEngine;
 
 public class Obstacle : PoolableMonobehaviour
 {
-    private Transform obstacleTransform;
+    public ObstaclePool Pool { get; private set; }
+    public GameObject ObstaclePrefab { get; private set; }
+    public bool IsSetup { get; private set; }
 
-    private Rigidbody obstacleRigidBody;
+    private Transform gameObjectTransform;
 
-    private MeshRenderer obstacleMeshRenderer;
-
-    private Collider obstacleCollider;
-
-    public Transform ObstacleTransform => obstacleTransform;
-    public Rigidbody ObstacleRigidBody => obstacleRigidBody;
-    public MeshRenderer ObstacleMeshRenderer => obstacleMeshRenderer;
-    public Collider ObstacleCollider => obstacleCollider;
-    public bool IsReset => CheckReset();
-
-    public void Reset()
+    public Obstacle(GameObject obsPrefab,ObstaclePool pool, Transform parentTransform)
     {
-        obstacleTransform = null;
-        obstacleRigidBody = null;
-        obstacleMeshRenderer = null;
-        obstacleCollider = null;
+        Pool = pool;
+        gameObjectTransform = parentTransform;
+        ObstaclePrefab = obsPrefab;
+        obsPrefab.transform.position = gameObjectTransform.position;
+        ObstaclePrefab.SetActive(false);
     }
 
-    private bool CheckReset()
+    public override void Setup(Vector3 spawnPoint)
     {
-        if (!obstacleTransform && !obstacleRigidBody && !obstacleMeshRenderer && !obstacleCollider)
-        {
-            return true;
-        }
-        return false;
+        if (IsSetup)
+            return;
+
+        ObstaclePrefab.transform.position = spawnPoint;
+        ObstaclePrefab.SetActive(true);
+        IsSetup = true;
+    }
+
+    public override void Release()
+    {
+        ObstaclePrefab.transform.position = gameObjectTransform.position;
+        ObstaclePrefab.SetActive(false);
+        IsSetup = default;
     }
 }
 

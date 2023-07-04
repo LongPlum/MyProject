@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class PoolableMonobehaviour : MonoBehaviour
-{ 
+public abstract class PoolableMonobehaviour : MonoBehaviour
+{
+    public abstract void Setup(Vector3 vector3);
+    public abstract void Release();
 }

@@ -2,27 +2,51 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ObstaclePool
+public class ObstaclePool : MonoBehaviour
 {
-    private Obstacle[] obstacles = new Obstacle[15];
 
-    public Obstacle TakeObstacle()
+
+    public Transform PoolablesParent { get; private set; }
+
+    [SerializeField] private List<GameObject> pooledGameObjects = new List<GameObject>();
+    private List<PoolableMonobehaviour> obstaclePool = new List<PoolableMonobehaviour>();
+
+    private void Start()
     {
-        if (obstacles.Length > 0)
+        PoolablesParent = transform;
+        for (int a = 0; a < pooledGameObjects.Count; a++)
         {
-            var item = obstacles[0];
-            return item;
+            for (int i = 0; i < 2; i++)
+            {
+                obstaclePool.Add(new Obstacle(Instantiate(pooledGameObjects[a]), this, PoolablesParent));
+            }
         }
-        //instansiate
-        
-        return null;
     }
 
-    public void ReleaseObstacle(Obstacle obstacleToRelese)
+    /*
+    private async void LoadPrefabs()
     {
-        //obstacles.Add(obstacleToRelese);
-        obstacleToRelese.Reset();
+        List<AsyncOperationHandle<GameObject>> prefabHandles = new List<AsyncOperationHandle<GameObject>>();
+        int index = 0;
+
+        foreach (AssetReference prefabReference in obstacleAssets)
+        {
+            AsyncOperationHandle<GameObject> handle = Addressables.LoadAssetAsync<GameObject>(prefabReference);
+            prefabHandles.Add(handle);
+        }
+
+        foreach (AsyncOperationHandle<GameObject> handle in prefabHandles)
+        {
+            await handle.Task;
+
+            if (handle.Status == AsyncOperationStatus.Succeeded)
+            {
+                var bruh = handle.Result;
+                
+            }
+        }
     }
-
-
+    */
 }
+
+

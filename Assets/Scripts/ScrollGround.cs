@@ -6,20 +6,8 @@ public class ScrollGround : MonoBehaviour
 {
     private float scrollSpeed = 10f;
     
-    
-
-    
-
-    void Start()
-    {
-    }
-     
     void Update()
     {
-        transform.Translate(Vector3.back * scrollSpeed * Time.deltaTime);
+        transform.Translate(scrollSpeed * Time.deltaTime * Vector3.back);
     }
-
- 
-
-
 }
