@@ -9,20 +9,24 @@ using UnityEngine.ResourceManagement.AsyncOperations;
 public class SpawnManager : MonoBehaviour
 {
     [SerializeField] private ObstaclePool obstaclePool;
-    [SerializeField] private GameObject spawnPoint;
-
-    private void Awake()
-    {
-        DontDestroyOnLoad(gameObject);
-    }
+    [SerializeField] private Transform spawnPoint;
+    
 
     void Start()
     {
+        
+    }
 
+    void Update()
+    {
+        
     }
 
     private void SpawnObstacle()
     {
-        
+
     }
+
+    //scriptable object настройка поведения spawnmanager, с какой частотой и где спавнить
+    //system input поменять на подписку попробовать
 }

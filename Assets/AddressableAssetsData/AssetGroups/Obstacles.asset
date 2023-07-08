@@ -41,10 +41,6 @@ MonoBehaviour:
     m_Address: Obstacle_RockWall
     m_ReadOnly: 0
     m_SerializedLabels: []
-  - m_GUID: b5d339d265d0a1145b1c541a4fb8d398
-    m_Address: Assets/Prefabs/Obstacles
-    m_ReadOnly: 0
-    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 1c9074cfb20889b478dc0dca98a15b71, type: 2}
   m_SchemaSet:
