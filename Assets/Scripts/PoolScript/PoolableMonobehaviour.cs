@@ -5,7 +5,6 @@ using UnityEngine;
 
 public interface IPoolableMonobehaviour
 {
-    ObstaclePoolItem poolKey { get; set; }
     void Release();
 }
 

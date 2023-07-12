@@ -40,7 +40,7 @@ public class ObstaclePool : MonoBehaviour
 
         foreach (var item in pooledGameObjects)
         {
-            var poolKey = item.GetComponent<IPoolableMonobehaviour>().poolKey;
+            var poolKey = item.GetComponent<PoolableKey>().poolKey;
             if (factory.ContainsKey(poolKey))
             {
                 Debug.LogError($"Factory already have {item.name} key", gameObject);
@@ -60,7 +60,7 @@ public class ObstaclePool : MonoBehaviour
 
         foreach (var item in pooledGameObjects)
         {
-            var poolKey = item.GetComponent<IPoolableMonobehaviour>().poolKey;
+            var poolKey = item.GetComponent<PoolableKey>().poolKey;
 
             if (dictionaryPool.ContainsKey(poolKey))
             {
@@ -104,18 +104,23 @@ public class ObstaclePool : MonoBehaviour
 
     public void ReleaseObstacle(GameObject obstacleToRelease)
     {
-        var poolableArray = obstacleToRelease.GetComponents<IPoolableMonobehaviour>();
-        if (poolableArray != null && poolableArray.Length > 0)
+        var poolKeyComp = obstacleToRelease.GetComponentInParent<PoolableKey>();
+        if (poolKeyComp != null)
         {
-            var poolKey = poolableArray[0].poolKey;
-            foreach (var item in poolableArray)
+            var poolableArray = obstacleToRelease.GetComponentsInParent<IPoolableMonobehaviour>();
+            if (poolableArray != null && poolableArray.Length > 0)
             {
-                item.Release();
+                foreach (var item in poolableArray)
+                {
+                    item.Release();
+                }
             }
-            obstacleToRelease.transform.position = transform.position;
-            obstacleToRelease.SetActive(false);
-            dictionaryPool[poolKey].Push(obstacleToRelease);
+            poolKeyComp.gameObject.transform.position = transform.position;
+            poolKeyComp.gameObject.SetActive(false);
+            dictionaryPool[poolKeyComp.poolKey].Push(poolKeyComp.gameObject);
         }
+        else
+            Destroy(obstacleToRelease);
     }
 
 
@@ -143,6 +148,9 @@ public class ObstaclePool : MonoBehaviour
         }
     }
     */
+
+    public int GetPoolItemLength => pooledGameObjects.Count;
+
 }
 
 

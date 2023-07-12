@@ -12,7 +12,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float jumpForce = 50f;
     [SerializeField] private float XOffset = 1f;
     [SerializeField] private float rollDuration = 2f;
-    [SerializeField] private Collider boundsCollider;
+    [SerializeField] private BoxCollider2D boundsCollider;
     [SerializeField] private SphereCollider playerCollider;
     [SerializeField] private InputActionAsset keyboardInput;
 
@@ -31,6 +31,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Start()
     {
+       
         moveHorizontal = keyboardInput.FindActionMap("Keyboard").FindAction("MoveHorizontal");
         moveVertical = keyboardInput.FindActionMap("Keyboard").FindAction("MoveVertical");
         moveHorizontal.Enable();

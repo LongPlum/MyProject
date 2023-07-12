@@ -9,9 +9,7 @@ using UnityEngine;
 
 public class Obstacle : MonoBehaviour, IPoolableMonobehaviour
 {
-    [ShowInInspector] public ObstaclePoolItem poolKey { get; set; }
-
-    public  void Release()
+    public void Release()
     {
     }
 }
