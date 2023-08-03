@@ -4,11 +4,20 @@ using UnityEngine;
 
 public class PlayerCollision : MonoBehaviour
 {
+    [SerializeField] ObstaclePool obstaclePool;
+    private PlayerHP playerHP;
+
+    private void Start()
+    {
+        playerHP = gameObject.GetComponent<PlayerHP>();
+    }
+
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Obstacle"))
+        if (other.gameObject.transform.parent.gameObject.CompareTag("Obstacle"))
         {
-            // release obstacle and -playerHp
+            playerHP.TakeDamage(1);
+            obstaclePool.ReleaseObstacle(other.gameObject);
         }
     }
 }

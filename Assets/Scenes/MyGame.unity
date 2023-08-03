@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 702414127}
   - component: {fileID: 702414126}
   - component: {fileID: 702414125}
-  - component: {fileID: 702414130}
+  - component: {fileID: 702414128}
   m_Layer: 0
   m_Name: Ground
   m_TagString: Ground
@@ -207,32 +207,19 @@ Transform:
   m_Father: {fileID: 1419780152}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &702414130
-BoxCollider2D:
+--- !u!65 &702414128
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 702414123}
-  m_Enabled: 1
-  m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
+  m_IsTrigger: 1
+  m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 10, y: 0.0001}
-  m_EdgeRadius: 0
+  m_Size: {x: 10, y: 0.001, z: 10}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -494,6 +481,7 @@ Transform:
   m_Children:
   - {fileID: 883156390}
   - {fileID: 1149258754}
+  - {fileID: 1685376775}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -521,8 +509,10 @@ GameObject:
   - component: {fileID: 1117313229}
   - component: {fileID: 1117313228}
   - component: {fileID: 1117313227}
+  - component: {fileID: 1117313234}
   - component: {fileID: 1117313231}
   - component: {fileID: 1117313232}
+  - component: {fileID: 1117313233}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -620,14 +610,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a91c8dde1b04f14ab43c61d9e68211b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gravity: 9.81
-  moveSpeed: 10
+  gravity: 14
+  moveSpeed: 12
   jumpForce: 10
   XOffset: 1
-  rollDuration: 2
-  boundsCollider: {fileID: 702414130}
+  rollDuration: 1
+  boundsCollider: {fileID: 702414128}
   playerCollider: {fileID: 1117313227}
-  keyboardInput: {fileID: -944628639613478452, guid: 27f7aaf47606c4d4393dd0f28687fb4b, type: 3}
 --- !u!114 &1117313232
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -640,6 +629,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8e0f711340538543997c65a38fe09ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  obstaclePool: {fileID: 883156391}
+--- !u!114 &1117313233
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1117313226}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 465ef70fe07c5244a9f70461e479efbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerHP: 2
+--- !u!54 &1117313234
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1117313226}
+  serializedVersion: 2
+  m_Mass: 0.0000001
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &1149258753
 GameObject:
   m_ObjectHideFlags: 0
@@ -687,7 +706,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   obstaclePool: {fileID: 883156391}
-  spawnManagerOptions: {fileID: 11400000, guid: 66df797442f6a5a4d8c26283834fb371, type: 2}
+  levelManager: {fileID: 1685376776}
+  spawnManagerOptions:
+  - {fileID: 11400000, guid: 66df797442f6a5a4d8c26283834fb371, type: 2}
+  - {fileID: 11400000, guid: 9887ad4aba17b674fb220e90f6d345eb, type: 2}
+  - {fileID: 11400000, guid: 6ebc1b025c3542c49aa835f49d24b3b0, type: 2}
 --- !u!65 &1149258756
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -750,6 +773,52 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1685376774
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1685376775}
+  - component: {fileID: 1685376776}
+  m_Layer: 0
+  m_Name: LevelManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1685376775
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1685376774}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1002619286}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1685376776
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1685376774}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fad2de94b6d90414d8db54ced592692e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mediumDifficultyTime: 5
+  hardDifficultyTime: 8
 --- !u!1 &1958281756
 GameObject:
   m_ObjectHideFlags: 0

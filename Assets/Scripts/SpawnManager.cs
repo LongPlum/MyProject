@@ -8,19 +8,23 @@ using UnityEngine;
 public class SpawnManager : MonoBehaviour
 {
     [SerializeField] private ObstaclePool obstaclePool;
-    [SerializeField] private SpawnManagerScriptableObj spawnManagerOptions;
+    [SerializeField] private LevelManager levelManager;
+    [SerializeField] private SpawnManagerScriptableObj[] spawnManagerOptions;
 
     private Config Options;
     private GameObject currentGameObject;
     private ObstaclePoolItem[] obstacleEnumValues;
     private float timer;
+    private int difficultyLevel;
 
 
-    private ObstaclePoolItem itemToSpawn => obstacleEnumValues[UnityEngine.Random.Range(0, obstaclePool.GetPoolItemLength)];
+    private ObstaclePoolItem ItemToSpawn => obstacleEnumValues[UnityEngine.Random.Range(0, obstaclePool.GetPoolItemLength)];
 
     void Start()
     {
-        Options = spawnManagerOptions.GetConfig();
+        levelManager.IncreaseLevelDifficulty += LevelUpDifficulty;
+        difficultyLevel = 0;
+        Options = spawnManagerOptions[difficultyLevel].GetConfig();
         obstacleEnumValues = (ObstaclePoolItem[])Enum.GetValues(typeof(ObstaclePoolItem));
     }
 
@@ -29,28 +33,43 @@ public class SpawnManager : MonoBehaviour
         timer += Time.deltaTime;
         if (timer >= Options.spawnTimerOption)
         {
-            currentGameObject = obstaclePool.TakeObstacle(itemToSpawn);
+            currentGameObject = obstaclePool.TakeObstacle(ItemToSpawn);
             currentGameObject.GetComponent<DirectionMovement>().obstacleMoveSpeed = Options.objectsMoveSpeedOption;
             currentGameObject.transform.position = new Vector3(UnityEngine.Random.Range(-4, 4), 0.5f, UnityEngine.Random.Range(66, 76));
 
-            timer = 0f;
+             timer = 0f;
         }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        obstaclePool.ReleaseObstacle(other.gameObject);
+        if (other.gameObject.transform.parent.CompareTag("Obstacle"))
+        {
+            obstaclePool.ReleaseObstacle(other.gameObject);
+        }
     }
 
-    // разобратся с addrasable
-    // system input поменять на подписку 
-    // написать нормальную фабрику
-    // сделать увеличение уровней сложности со временем игры с помощью массива скриптабл обж
-    // коллизия игрока с обстаклами
+
+    private void LevelUpDifficulty()
+    {
+        difficultyLevel++;
+        Options = spawnManagerOptions[difficultyLevel].GetConfig();
+    }
 
 
+    // сделать визуальный откок игрока при столкновении с обстаклом, и попробовать реализовать разлет обстакла на части
+    // добавить спавн еды и коллизия с ней
+    // сделать интерфейс, с красивым индикатором хп, времени, gameoverом и стартом
+    // заменить все примитивы на ассеты из ассет стора + добавить норальный скайбокс
+    // добавть минимальные звуковые эффекты
+
+    // разобратся с addrasable ? taski nushni
 
 
+    // сделать увеличение уровней сложности со временем игры с помощью массива скриптабл обж +
+    // system input поменять на подписку ? 
+    // коллизия игрока с обстаклами + , лагает изза ригид боди?
+    // boxCollider2D ломает мувмент
     // исправил record +, https://stackoverflow.com/questions/64749385/predefined-type-system-runtime-compilerservices-isexternalinit-is-not-defined
     //  obstaclerelease доделать +
     // obstacle ms выделить в отдельный компонент и прокинуть +

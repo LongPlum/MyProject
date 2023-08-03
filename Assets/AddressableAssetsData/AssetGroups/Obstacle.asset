@@ -10,40 +10,44 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
-  m_Name: Obstacles
+  m_Name: Obstacle
   m_EditorClassIdentifier: 
-  m_GroupName: Obstacles
+  m_GroupName: Obstacle
   m_Data:
     m_SerializedData: []
-  m_GUID: 84e107ae791adbf45be60ebb7697a0df
+  m_GUID: 596b07c8d08791346a5428a657d442d1
   m_SerializeEntries:
   - m_GUID: d651fd721ce90ae44a948cd60ad4c466
-    m_Address: Obctacle_FallenTreeRock
+    m_Address: Assets/Prefabs/Obstacles/Obctacle_FallenTreeRock.prefab
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - ObstacleKey
   - m_GUID: 4653509391c037240b8fd1982df94e60
-    m_Address: Obstacle_CarTire
+    m_Address: Assets/Prefabs/Obstacles/Obstacle_CarTire.prefab
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - ObstacleKey
   - m_GUID: e0f11839e3b4d0d459e8ead6c5ca332b
-    m_Address: Obstacle_CarTireFallenTree
+    m_Address: Assets/Prefabs/Obstacles/Obstacle_CarTireFallenTree.prefab
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - ObstacleKey
   - m_GUID: a9f3d27e8982ec94c82183021b313398
-    m_Address: Obstacle_FallenTree
+    m_Address: Assets/Prefabs/Obstacles/Obstacle_FallenTree.prefab
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - ObstacleKey
   - m_GUID: 9eb528348b6158a4888fa149bf71443f
-    m_Address: Obstacle_Rock
+    m_Address: Assets/Prefabs/Obstacles/Obstacle_Rock.prefab
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - ObstacleKey
   - m_GUID: 57f5dd8d82dd36b41b8cdf3c72d962d0
-    m_Address: Obstacle_RockWall
+    m_Address: Assets/Prefabs/Obstacles/Obstacle_RockWall.prefab
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - ObstacleKey
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 1c9074cfb20889b478dc0dca98a15b71, type: 2}
   m_SchemaSet:
-    m_Schemas:
-    - {fileID: 11400000, guid: a5611cf833df5184286de745945a856f, type: 2}
-    - {fileID: 11400000, guid: bc5b7f09591bdec48b48cd7f22b45848, type: 2}
+    m_Schemas: []

@@ -43,7 +43,7 @@ MonoBehaviour:
   m_GroupAssets:
   - {fileID: 11400000, guid: 30a44583fb601674aa1d896b83bd9c69, type: 2}
   - {fileID: 11400000, guid: 373ed44eeac277d4e8462b806e66d354, type: 2}
-  - {fileID: 11400000, guid: d531077332ddf0144acbf5de132554ec, type: 2}
+  - {fileID: 11400000, guid: 2ab8d890b73dc704aaa4084991caf538, type: 2}
   m_BuildSettings:
     m_CompileScriptsInVirtualMode: 0
     m_CleanupStreamingAssetsAfterBuilds: 1
@@ -85,6 +85,7 @@ MonoBehaviour:
   m_LabelTable:
     m_LabelNames:
     - default
+    - ObstacleKey
   m_SchemaTemplates: []
   m_GroupTemplateObjects:
   - {fileID: 11400000, guid: 0eb8b62885ed2434a98158efcc94437d, type: 2}

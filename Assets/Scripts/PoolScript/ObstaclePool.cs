@@ -2,13 +2,16 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 using Sirenix.OdinInspector;
 using Sirenix;
 using UnityEngine.ResourceManagement.AsyncOperations;
+using UnityEngine.ResourceManagement.ResourceLocations;
 using System.Linq;
 
 public class ObstaclePool : MonoBehaviour
 {
+    private string assetGroupKey = "ObstacleKey";
 
     [SerializeField] private int poolSize;
     [SerializeField] private List<GameObject> pooledGameObjects = new List<GameObject>();
@@ -16,6 +19,11 @@ public class ObstaclePool : MonoBehaviour
     private Dictionary<ObstaclePoolItem, Stack<GameObject>> dictionaryPool = new();
     private Dictionary<ObstaclePoolItem, Func<GameObject>> factory = new();
 
+
+    private void Awake()
+    {
+        LoadAssetGroup();
+    }
 
     private void Start()
     {
@@ -124,30 +132,32 @@ public class ObstaclePool : MonoBehaviour
     }
 
 
-    /*
-    private async void LoadPrefabs()
+
+    private async void LoadAssetGroup()
     {
-        List<AsyncOperationHandle<GameObject>> prefabHandles = new List<AsyncOperationHandle<GameObject>>();
-        int index = 0;
+        // Загрузка группы ассетов по имени группы
+        AsyncOperationHandle<IList<GameObject>> handle = Addressables.LoadAssetsAsync<GameObject>(assetGroupKey, null);
+        // Ожидание завершения загрузки
+        await handle.Task;
 
-        foreach (AssetReference prefabReference in obstacleAssets)
+        // Обработка результата
+        if (handle.Status == AsyncOperationStatus.Succeeded)
         {
-            AsyncOperationHandle<GameObject> handle = Addressables.LoadAssetAsync<GameObject>(prefabReference);
-            prefabHandles.Add(handle);
-        }
-
-        foreach (AsyncOperationHandle<GameObject> handle in prefabHandles)
-        {
-            await handle.Task;
-
-            if (handle.Status == AsyncOperationStatus.Succeeded)
+            IList<GameObject> assets = handle.Result;
+            // Выполнение действий с загруженными ассетами
+            foreach (GameObject asset in assets)
             {
-                var bruh = handle.Result;
-                
+               // Debug.Log(asset.name);
             }
         }
+        else
+        {
+            Debug.LogError("Failed to load asset group: " + handle.OperationException);
+        }
+
+        // Освобождение ресурсов
+        Addressables.Release(handle);
     }
-    */
 
     public int GetPoolItemLength => pooledGameObjects.Count;
 

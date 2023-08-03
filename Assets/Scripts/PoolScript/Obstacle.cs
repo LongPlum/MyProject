@@ -9,7 +9,7 @@ using UnityEngine;
 
 public class Obstacle : MonoBehaviour, IPoolableMonobehaviour
 {
-    public void Release()
+    public void Release() 
     {
     }
 }

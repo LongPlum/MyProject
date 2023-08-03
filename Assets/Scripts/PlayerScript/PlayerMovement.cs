@@ -12,32 +12,42 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float jumpForce = 50f;
     [SerializeField] private float XOffset = 1f;
     [SerializeField] private float rollDuration = 2f;
-    [SerializeField] private BoxCollider2D boundsCollider;
+    [SerializeField] private BoxCollider boundsCollider;
     [SerializeField] private SphereCollider playerCollider;
-    [SerializeField] private InputActionAsset keyboardInput;
 
-
-
-    private float HalfRollDuration => rollDuration / 2;
     private float gravityAcc;
     private float Yoffset;
     //private float inertia;
     private Sequence slideTween;
     private bool isJump;
-    private InputAction moveHorizontal;
-    private InputAction moveVertical;
+    private KeyboardInput keyboardInput;
+    private InputAction moveHorizontalAction;
+    private InputAction moveVerticalAction;
+
+    private float HalfRollDuration => rollDuration / 2;
 
 
+    private void Awake()
+    {
+        keyboardInput = new();
+        moveHorizontalAction = keyboardInput.Keyboard.MoveHorizontal;
+        moveVerticalAction = keyboardInput.Keyboard.MoveVertical;
+    }
+
+    private void OnEnable()
+    {
+        moveHorizontalAction.Enable();
+        moveVerticalAction.Enable();
+    }
+
+    private void OnDisable()
+    {
+        moveHorizontalAction.Disable();
+        moveVerticalAction.Disable();
+    }
 
     private void Start()
     {
-       
-        moveHorizontal = keyboardInput.FindActionMap("Keyboard").FindAction("MoveHorizontal");
-        moveVertical = keyboardInput.FindActionMap("Keyboard").FindAction("MoveVertical");
-        moveHorizontal.Enable();
-        moveVertical.Enable();
-
-
         Yoffset = playerCollider.radius;
         slideTween = DOTween.Sequence()
               .Append(transform.DOScaleY(transform.localScale.y / 2, HalfRollDuration))
@@ -57,7 +67,7 @@ public class PlayerMovement : MonoBehaviour
         //inertia += moveHorizontal * inertiaSpeed * Time.deltaTime;
         //inertia = Mathf.Clamp(inertia, -inertiaSpeed, inertiaSpeed);
 
-        var dir = new Vector3(moveHorizontal.ReadValue<float>() * moveSpeed * Time.deltaTime, gravityAcc * Time.deltaTime, 0);
+        var dir = new Vector3(moveHorizontalAction.ReadValue<float>() * moveSpeed * Time.deltaTime, gravityAcc * Time.deltaTime, 0);
         var pos = transform.position;
         var posNext = dir + pos;
         
@@ -101,9 +111,9 @@ public class PlayerMovement : MonoBehaviour
 
         if (isGrounded && !slideTween.IsPlaying())
         {
-            if (moveVertical.ReadValue<float>() < 0)
+            if (moveVerticalAction.ReadValue<float>() < 0)
                 slideTween.Restart();
-            else if (moveVertical.ReadValue<float>() > 0 && !isJump)
+            else if (moveVerticalAction.ReadValue<float>() > 0 && !isJump)
             {
                 gravityAcc = jumpForce;
                 isJump = true;
