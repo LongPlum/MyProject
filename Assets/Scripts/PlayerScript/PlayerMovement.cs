@@ -14,6 +14,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float rollDuration = 2f;
     [SerializeField] private BoxCollider boundsCollider;
     [SerializeField] private SphereCollider playerCollider;
+    [SerializeField] private PlayerCollision playerCollision;
+
 
     private float gravityAcc;
     private float Yoffset;
@@ -46,8 +48,25 @@ public class PlayerMovement : MonoBehaviour
         moveVerticalAction.Disable();
     }
 
+    private void DisableMovement(float Delay)
+    {
+        moveHorizontalAction.Disable();
+        moveVerticalAction.Disable();
+        StartCoroutine(nameof(EnableMovement), Delay);
+    }
+
+    private IEnumerator EnableMovement(float Delay)
+    {
+        yield return new WaitForSeconds(Delay);
+        moveHorizontalAction.Enable();
+        moveVerticalAction.Enable();
+    }
+
+
+
     private void Start()
     {
+        playerCollision.OnPlayerCollision += DisableMovement;
         Yoffset = playerCollider.radius;
         slideTween = DOTween.Sequence()
               .Append(transform.DOScaleY(transform.localScale.y / 2, HalfRollDuration))
@@ -58,6 +77,9 @@ public class PlayerMovement : MonoBehaviour
               .Insert(HalfRollDuration, DOTween.To(a => Yoffset = a, Yoffset / 2, Yoffset, HalfRollDuration));
 
     }
+
+ 
+
 
     private void Update()
     {

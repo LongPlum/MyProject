@@ -14,10 +14,17 @@ public class ObstaclePool : MonoBehaviour
     private string assetGroupKey = "ObstacleKey";
 
     [SerializeField] private int poolSize;
-    [SerializeField] private List<GameObject> pooledGameObjects = new List<GameObject>();
+    [SerializeField] private List<GameObject> pooledGameObjects = new ();
 
     private Dictionary<ObstaclePoolItem, Stack<GameObject>> dictionaryPool = new();
     private Dictionary<ObstaclePoolItem, Func<GameObject>> factory = new();
+
+    private List<GameObject> obstacleOnScene = new ();
+
+    public IReadOnlyCollection<GameObject> ObstacleOnScene
+    {
+        get { return obstacleOnScene.AsReadOnly(); }
+    }
 
 
     private void Awake()
@@ -99,11 +106,13 @@ public class ObstaclePool : MonoBehaviour
             if (obstacleStack.Count > 0)
             {
                 GameObject go = obstacleStack.Pop();
+                obstacleOnScene.Add(go);
                 go.SetActive(true);
                 return go;
             }
 
             GameObject factoryGo = factory[obstacleType]();
+            obstacleOnScene.Add(factoryGo);
             factoryGo.SetActive(true);
             return factoryGo;
         }
@@ -125,6 +134,7 @@ public class ObstaclePool : MonoBehaviour
             }
             poolKeyComp.gameObject.transform.position = transform.position;
             poolKeyComp.gameObject.SetActive(false);
+            obstacleOnScene.Remove(poolKeyComp.gameObject);
             dictionaryPool[poolKeyComp.poolKey].Push(poolKeyComp.gameObject);
         }
         else

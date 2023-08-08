@@ -617,6 +617,7 @@ MonoBehaviour:
   rollDuration: 1
   boundsCollider: {fileID: 702414128}
   playerCollider: {fileID: 1117313227}
+  playerCollision: {fileID: 1117313232}
 --- !u!114 &1117313232
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -630,6 +631,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   obstaclePool: {fileID: 883156391}
+  knockBackDuration: 1
+  knockBackDistance: 20
 --- !u!114 &1117313233
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -707,6 +710,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   obstaclePool: {fileID: 883156391}
   levelManager: {fileID: 1685376776}
+  playerCollision: {fileID: 1117313232}
   spawnManagerOptions:
   - {fileID: 11400000, guid: 66df797442f6a5a4d8c26283834fb371, type: 2}
   - {fileID: 11400000, guid: 9887ad4aba17b674fb220e90f6d345eb, type: 2}

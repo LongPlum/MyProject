@@ -9,6 +9,7 @@ public class SpawnManager : MonoBehaviour
 {
     [SerializeField] private ObstaclePool obstaclePool;
     [SerializeField] private LevelManager levelManager;
+    [SerializeField] private PlayerCollision playerCollision;
     [SerializeField] private SpawnManagerScriptableObj[] spawnManagerOptions;
 
     private Config Options;
@@ -22,6 +23,7 @@ public class SpawnManager : MonoBehaviour
 
     void Start()
     {
+        playerCollision.OnPlayerCollision += SpawnStop;
         levelManager.IncreaseLevelDifficulty += LevelUpDifficulty;
         difficultyLevel = 0;
         Options = spawnManagerOptions[difficultyLevel].GetConfig();
@@ -56,16 +58,20 @@ public class SpawnManager : MonoBehaviour
         Options = spawnManagerOptions[difficultyLevel].GetConfig();
     }
 
+    private void SpawnStop(float delay)
+    {
+        timer -= delay;
+    }
 
-    // сделать визуальный откок игрока при столкновении с обстаклом, и попробовать реализовать разлет обстакла на части
-    // добавить спавн еды и коллизия с ней
+    // попробовать реализовать разлет обстакла на части
     // сделать интерфейс, с красивым индикатором хп, времени, gameoverом и стартом
     // заменить все примитивы на ассеты из ассет стора + добавить норальный скайбокс
     // добавть минимальные звуковые эффекты
 
     // разобратся с addrasable ? taski nushni
+    // добавить спавн еды и коллизия с ней
 
-
+    // сделать визуальный откок игрока при столкновении с обстаклом +
     // сделать увеличение уровней сложности со временем игры с помощью массива скриптабл обж +
     // system input поменять на подписку ? 
     // коллизия игрока с обстаклами + , лагает изза ригид боди?
