@@ -1,7 +1,7 @@
 # <h1 align="center"> RunnerGame </h1>
 
 ## 📃Description
-This is prototype of my game in hyper-casual genre, the goal is to avoid as many obstacles as possible with difficulty of the game grows over time, as a reference i take "subway surfers" game, right now im wokring on developing UI, adding music and sound effects and changing primitives on simple 3d models with animation. 
+This is prototype of my game in hyper-casual genre, the goal is to avoid as many obstacles as possible with difficulty of the game grows over time, right now im wokring on developing UI, adding music and sound effects, changing primitives on simple 3d models with animation, as a reference i take "subway surfers" game. 
 
 ## 🚀Features
 |      Scripts      |                                Description                                |
